@@ -28,7 +28,7 @@ class App extends React.Component {
     this.setState({ board, currentPlayer: nextPlayer });
   };
 
-  register = ({ firstName, secondName }) => {
+  register = (firstName, secondName) => {
     this.setState({ firstName, secondName });
   };
 
