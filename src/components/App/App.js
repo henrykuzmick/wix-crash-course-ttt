@@ -24,10 +24,13 @@ class App extends React.Component {
     if (board[rowIndex][cellIndex] !== '') return;
 
     board[rowIndex][cellIndex] = this.state.currentPlayer;
-    if (gameService(board) === this.state.currentPlayer) {
-      this.setState({ winner: this.state.currentPlayer });
-    } else {
+
+    if (gameService(board) === 'TIE') {
       this.setState({ winner: 'TIE' });
+    } else {
+      if (gameService(board) === this.state.currentPlayer) {
+        this.setState({ winner: this.state.currentPlayer });
+      }
     }
     const nextPlayer = this.state.currentPlayer === 'X' ? 'O' : 'X';
     this.setState({ board, currentPlayer: nextPlayer });
@@ -52,6 +55,8 @@ class App extends React.Component {
       case 'TIE':
         endMessage = 'TIE';
         break;
+      default:
+        endMessage = '';
     }
 
     return (
