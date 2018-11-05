@@ -3,9 +3,19 @@ import { mount } from 'enzyme';
 import { I18nextProvider } from 'react-i18next';
 import App from './App';
 import i18n from '../../../test/helpers/i18n.mock';
+import {
+  inputTestkitFactory,
+  buttonTestkitFactory,
+} from 'wix-style-react/dist/testkit/enzyme';
 
 const appDriver = () => {
   let wrapper;
+
+  const getInput = hookName =>
+    inputTestkitFactory({ wrapper, dataHook: hookName });
+  const getButton = hookName =>
+    buttonTestkitFactory({ wrapper, dataHook: hookName });
+
   return {
     render: () =>
       (wrapper = mount(
@@ -14,15 +24,11 @@ const appDriver = () => {
         </I18nextProvider>,
       )),
     newGame: (p1Name, p2Name) => {
-      wrapper
-        .find('[data-hook="first-user-input"]')
-        .simulate('change', { target: { value: p1Name } });
+      getInput('first-user-input').enterText(p1Name);
 
-      wrapper
-        .find('[data-hook="second-user-input"]')
-        .simulate('change', { target: { value: p2Name } });
+      getInput('second-user-input').enterText(p2Name);
 
-      wrapper.find('[data-hook="new-game"]').simulate('click');
+      getButton('new-game').click();
     },
     clickACellAt: index =>
       wrapper
