@@ -18,8 +18,11 @@ class App extends React.Component {
     winner: '',
     currentPlayer: 'X',
   };
+
   handleCellClick = (rowIndex, cellIndex) => {
     const board = this.state.board.map(row => [...row]);
+    if (board[rowIndex][cellIndex] !== '') return;
+
     board[rowIndex][cellIndex] = this.state.currentPlayer;
     if (gameService(board) === this.state.currentPlayer) {
       this.setState({ winner: this.state.currentPlayer });

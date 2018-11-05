@@ -18,6 +18,8 @@ const appDriver = page => ({
   hasWinner: async () => !!(await page.$('[data-hook="winner-message"]')),
   isGameShown: async () =>
     !!(await page.$$('[data-hook="game-component"]')).length,
+  isRegistrationShown: async () =>
+    !!(await page.$$('[data-hook="registration-component"]')).length,
 });
 
 describe('React application', () => {
@@ -68,5 +70,15 @@ describe('React application', () => {
     expect(await driver.isGameShown()).toBe(false);
     await driver.newGame(p1Name, p2Name);
     expect(await driver.isGameShown()).toBe(true);
+  });
+
+  it('Only displays registration while the game has not started yet', async () => {
+    const p1Name = 'Yaniv';
+    const p2Name = 'Computer';
+
+    await driver.navigate();
+    expect(await driver.isRegistrationShown()).toBe(true);
+    await driver.newGame(p1Name, p2Name);
+    expect(await driver.isRegistrationShown()).toBe(false);
   });
 });

@@ -7,7 +7,7 @@ class Registration extends React.Component {
   };
   render() {
     return (
-      <div>
+      <div data-hook="registration-component">
         <input
           type="text"
           value={this.state.firstName}

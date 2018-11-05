@@ -76,4 +76,18 @@ describe('App', () => {
 
     expect(driver.getWinnerMessage()).toBe(`${p2Name} won!`);
   });
+
+  it('blocks a clicked cell', () => {
+    const p1Name = 'Yaniv';
+    const p2Name = 'Computer';
+
+    driver.render();
+
+    driver.newGame(p1Name, p2Name);
+    driver.clickACellAt(0);
+    driver.clickACellAt(0);
+    driver.clickACellAt(1);
+    expect(driver.getACellAt(0)).toBe('X');
+    expect(driver.getACellAt(1)).toBe('O');
+  });
 });
