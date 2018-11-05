@@ -1,4 +1,5 @@
 import React from 'react';
+import Text from 'wix-style-react/Text';
 import styles from './Game.scss';
 
 class Game extends React.Component {
@@ -14,10 +15,16 @@ class Game extends React.Component {
     return (
       <div data-hook="game-component">
         <div className={styles.players}>
-          <span data-hook="p1-title">{firstName}</span>
-          <span data-hook="p2-title">{secondName}</span>
+          <Text size="medium" data-hook="p1-title">
+            {firstName}
+          </Text>
+          <Text size="medium" data-hook="p2-title">
+            {secondName}
+          </Text>
         </div>
-        <p data-hook="next-player">next turn: {currentPlayer}</p>
+        <Text size="small" data-hook="next-player">
+          next turn: {currentPlayer}
+        </Text>
         <table>
           <tbody>
             {board.map((row, rowIndex) => (

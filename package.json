@@ -30,7 +30,8 @@
     "wix-bootstrap-ng": "latest",
     "wix-bootstrap-renderer": "latest",
     "wix-express-csrf": "latest",
-    "wix-express-require-https": "latest"
+    "wix-express-require-https": "latest",
+    "wix-style-react": "^5.8.1"
   },
   "devDependencies": {
     "react-test-renderer": "~15.6.0",

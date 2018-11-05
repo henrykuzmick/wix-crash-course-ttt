@@ -1,5 +1,6 @@
 import React from 'react';
 import { translate } from 'react-i18next';
+import Text from 'wix-style-react/Text';
 import s from './App.scss';
 import Registration from '../Registration';
 import Game from '../Game';
@@ -72,7 +73,9 @@ class App extends React.Component {
           />
         )}
         {this.state.winner && (
-          <div data-hook="winner-message">{endMessage}</div>
+          <div data-hook="winner-message">
+            <Text skin="success">{endMessage}</Text>
+          </div>
         )}
       </div>
     );
