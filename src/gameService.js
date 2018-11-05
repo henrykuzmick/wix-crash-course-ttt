@@ -1,14 +1,9 @@
 const gameService = board => {
   const isWin = symbol => {
-    const rowWin =
-      board[0].every(cell => cell === symbol) ||
-      board[1].every(cell => cell === symbol) ||
-      board[2].every(cell => cell === symbol);
-
-    const columnWin =
-      board.every(cell => cell[0] === symbol) ||
-      board.every(cell => cell[1] === symbol) ||
-      board.every(cell => cell[2] === symbol);
+    for (let i = 0; i < 3; i++) {
+      if (board[i].every(cell => cell === symbol)) return true;
+      if (board.every(cell => cell[i] === symbol)) return true;
+    }
 
     const diagonalWin1 =
       board[0][0] === symbol &&
@@ -20,7 +15,7 @@ const gameService = board => {
       board[1][1] === symbol &&
       board[2][0] === symbol;
 
-    return rowWin || columnWin || diagonalWin1 || diagonalWin2;
+    return diagonalWin1 || diagonalWin2;
   };
 
   const isFilled = () => {

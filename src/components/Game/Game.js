@@ -1,14 +1,23 @@
 import React from 'react';
-import './Game.scss';
+import styles from './Game.scss';
 
 class Game extends React.Component {
   state = {};
   render() {
-    const { firstName, secondName, board, onCellClick } = this.props;
+    const {
+      firstName,
+      secondName,
+      board,
+      onCellClick,
+      currentPlayer,
+    } = this.props;
     return (
       <div data-hook="game-component">
-        <span data-hook="p1-title">{firstName}</span>
-        <span data-hook="p2-title">{secondName}</span>
+        <div className={styles.players}>
+          <span data-hook="p1-title">{firstName}</span>
+          <span data-hook="p2-title">{secondName}</span>
+        </div>
+        <p data-hook="next-player">next turn: {currentPlayer}</p>
         <table>
           <tbody>
             {board.map((row, rowIndex) => (

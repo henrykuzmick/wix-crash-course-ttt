@@ -59,6 +59,7 @@ class App extends React.Component {
         {!registrationDone && <Registration onNewGame={this.register} />}
         {registrationDone && (
           <Game
+            currentPlayer={this.state.currentPlayer}
             firstName={this.state.firstName}
             secondName={this.state.secondName}
             board={this.state.board}

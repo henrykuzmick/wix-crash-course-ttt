@@ -36,6 +36,7 @@ const appDriver = () => {
         .text(),
     unmount: () => wrapper.unmount(),
     getWinnerMessage: () => wrapper.find('[data-hook="winner-message"]').text(),
+    getNextPlayer: () => wrapper.find('[data-hook="next-player"]').text(),
   };
 };
 
@@ -94,7 +95,6 @@ describe('App', () => {
   it('there should be a tie', () => {
     const p1Name = 'drako';
     const p2Name = 'harry';
-
     driver.render();
 
     driver.newGame(p1Name, p2Name);
@@ -110,5 +110,16 @@ describe('App', () => {
     driver.clickACellAt(8);
 
     expect(driver.getWinnerMessage()).toBe(`TIE`);
+  });
+
+  it('displays the next player', () => {
+    const p1Name = 'Yaniv';
+    const p2Name = 'Computer';
+    driver.render();
+
+    driver.newGame(p1Name, p2Name);
+    expect(driver.getNextPlayer()).toBe('next turn: X');
+    driver.clickACellAt(0);
+    expect(driver.getNextPlayer()).toBe('next turn: O');
   });
 });
