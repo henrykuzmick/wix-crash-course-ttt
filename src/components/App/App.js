@@ -26,6 +26,8 @@ class App extends React.Component {
     board[rowIndex][cellIndex] = this.state.currentPlayer;
     if (gameService(board) === this.state.currentPlayer) {
       this.setState({ winner: this.state.currentPlayer });
+    } else {
+      this.setState({ winner: 'TIE' });
     }
     const nextPlayer = this.state.currentPlayer === 'X' ? 'O' : 'X';
     this.setState({ board, currentPlayer: nextPlayer });
@@ -38,6 +40,19 @@ class App extends React.Component {
   render() {
     const { firstName, secondName } = this.state;
     const registrationDone = firstName !== '' && secondName !== '';
+    let endMessage = '';
+
+    switch (this.state.winner) {
+      case 'X':
+        endMessage = `${this.state.firstName} won!`;
+        break;
+      case 'O':
+        endMessage = `${this.state.secondName} won!`;
+        break;
+      case 'TIE':
+        endMessage = 'TIE';
+        break;
+    }
 
     return (
       <div className={s.root}>
@@ -51,11 +66,7 @@ class App extends React.Component {
           />
         )}
         {this.state.winner && (
-          <div data-hook="winner-message">{`${
-            this.state.winner === 'X'
-              ? this.state.firstName
-              : this.state.secondName
-          } won!`}</div>
+          <div data-hook="winner-message">{endMessage}</div>
         )}
       </div>
     );

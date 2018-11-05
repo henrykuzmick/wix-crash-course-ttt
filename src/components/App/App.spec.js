@@ -90,4 +90,25 @@ describe('App', () => {
     expect(driver.getACellAt(0)).toBe('X');
     expect(driver.getACellAt(1)).toBe('O');
   });
+
+  it('there should be a tie', () => {
+    const p1Name = 'drako';
+    const p2Name = 'harry';
+
+    driver.render();
+
+    driver.newGame(p1Name, p2Name);
+
+    driver.clickACellAt(0);
+    driver.clickACellAt(3);
+    driver.clickACellAt(6);
+    driver.clickACellAt(2);
+    driver.clickACellAt(5);
+    driver.clickACellAt(7);
+    driver.clickACellAt(1);
+    driver.clickACellAt(4);
+    driver.clickACellAt(8);
+
+    expect(driver.getWinnerMessage()).toBe(`TIE`);
+  });
 });
